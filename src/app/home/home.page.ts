@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ContatoModalPage } from '../contato-modal/contato-modal.page';
 import { Storage } from '@ionic/storage';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,7 @@ import { Storage } from '@ionic/storage';
 })
 export class HomePage {
 
-  constructor(public modalController: ModalController, private storage: Storage) {
+  constructor(public modalController: ModalController, private storage: Storage, private router: Router) {
     this.storage.get('contato').then((contato) => {
       if (contato) {
         this.contatos = contato
@@ -38,6 +39,10 @@ export class HomePage {
     modal.onDidDismiss().then((contato) => {
       this.add(contato.data)
     })
+  }
+
+  ir_info(nome) {
+    this.router.navigateByUrl('/info-detail/' + nome);  
   }
 
   contatos = []

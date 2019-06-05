@@ -1,9 +1,12 @@
 <ion-header>
   <ion-toolbar>
+
     <ion-buttons slot="start">
       <ion-button href='/home'>voltar</ion-button>
     </ion-buttons>
+
     <ion-title>Informações</ion-title>
+
   </ion-toolbar>
 </ion-header>
 
@@ -11,13 +14,17 @@
 
   <ion-item>
     <ion-avatar slot="start">
-      <img src="https://yt3.ggpht.com/a/AGF-l790ZGzS4Qw4FWGGEp6MQHqbWjxxvVeJhF7_sA=s900-mo-c-c0xffffffff-rj-k-no"
-        alt="">
+      <img src="https://yt3.ggpht.com/a/AGF-l790ZGzS4Qw4FWGGEp6MQHqbWjxxvVeJhF7_sA=s900-mo-c-c0xffffffff-rj-k-no" alt="">
     </ion-avatar>
     <ion-label>
       <h2>ID: {{id}}</h2>
       <p>Deixa a vida me levar...</p>
     </ion-label>
+
+    <ion-item color="primary" href="/info-detail/{{id}}">
+      Detalhes
+    </ion-item>
+
   </ion-item>
 
   <ion-list>
