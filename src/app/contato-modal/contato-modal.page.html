@@ -20,8 +20,12 @@
       </ion-item>
 
       <ion-item>
-        <ion-label>Url: </ion-label>
         <ion-input [(ngModel)]="novo_contato.url"></ion-input>
+        <img src="{{novo_contato.url}}" alt="">
+        <ion-button (click)="take_picture()">
+          <ion-icon name="camera"></ion-icon>
+        </ion-button>
+        
       </ion-item>
 
       <ion-item>
@@ -29,8 +33,7 @@
         <ion-input [(ngModel)]="novo_contato.id"></ion-input>
       </ion-item>
 
-      <ion-button expand="full" (click)="add()">Vai</ion-button>
-
+      <ion-button expanded="full" (click)="add()">Vai</ion-button>
     </ion-card-content>
 
   </ion-card>
