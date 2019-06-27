@@ -5,6 +5,7 @@ import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { LoadingController } from '@ionic/angular';
+import { ContatoServiceService } from '../services/contato-service.service';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,7 @@ export class HomePage {
   contatos: any;
 
   constructor(public modalController: ModalController, private storage: Storage,
-    private router: Router, private http: HttpClient, public loadingController: LoadingController) {
+    private router: Router, private http: HttpClient, public loadingController: LoadingController, private contatoService: ContatoServiceService) {
     this.contatos = [];
 
     // Loading
@@ -24,10 +25,10 @@ export class HomePage {
       message: 'Hellooo',
     }).then((loader) => {
       loader.present();
-      this.http.get('http://5d0ab6c4c5896f0014e86dcb.mockapi.io/contact').subscribe(
+      this.contatoService.list().subscribe(
         (data) => {
           this.contatos = data;
-          loader.dismiss;
+          loader.dismiss();
         }
       )
     });
@@ -38,9 +39,10 @@ export class HomePage {
       message: 'Ok'
     }).then((loader) => {
       loader.present();
-      this.http.post('http://5d0ab6c4c5896f0014e86dcb.mockapi.io/contact/', contato).subscribe(
+      this.contatoService.add(contato).subscribe(
         (data) => {
-          this.contatos.push(data)
+          this.contatos.push(data);
+          loader.dismiss();
         }
       )
     });
@@ -51,10 +53,11 @@ export class HomePage {
       message: 'Ok'
     }).then((loader) => {
       loader.present();
-      this.http.delete('http://5d0ab6c4c5896f0014e86dcb.mockapi.io/contact/' + contato.id).subscribe(
+      this.contatoService.remove(contato).subscribe(
         (data) => {
           var i = this.contatos.indexOf(contato);
           this.contatos.splice(i, 1);
+          loader.dismiss();
         }
       )
     });
